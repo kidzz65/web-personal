@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pesan Muncul Per Huruf</title>
+<style>
+  body {
+    background: #0f172a;
+    color: #e5e7eb;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+  }
+  .trigger {
+    cursor: pointer;
+    background: #22d3ee;
+    color: #0f172a;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-top: 15px;
+    display: inline-block;
+  }
+  .trigger:hover {
+    background: #06b6d4;
+  }
+  .box {
+    background: #1e293b;
+    border: 2px solid #22d3ee;
+    border-radius: 10px;
+    padding: 15px;
+    width: 300px;
+    min-height: 100px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    font-size: 1.1rem;
+    white-space: pre-wrap;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: none;
+  }
+  .box.show {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
+</head>
+<body>
+
+<h2 id="judul">Ada pesan untukmu </h2>
+<div class="trigger" id="tombol">Klik di sini</div>
+<div id="output" class="box"></div>
+
+<script>
+  const tombol = document.getElementById('tombol');
+  const output = document.getElementById('output');
+  const judul = document.getElementById('judul');
+
+  const text = "maneh can mandinya? gera mandi maneh!😁";
+  let index = 0;
+  let interval;
+
+  tombol.addEventListener('click', () => {
+    output.textContent = "";
+    index = 0;
+    clearInterval(interval);
+
+    // Hilangkan judul & tombol
+    judul.style.display = "none";
+    tombol.style.display = "none";
+
+    // Tampilkan kotak
+    output.classList.add('show');
+
+    // Efek ketik per huruf
+    interval = setInterval(() => {
+      output.textContent += text[index];
+      index++;
+      if (index >= text.length) {
+        clearInterval(interval);
+      }
+    }, 50);
+  });
+</script>
+
+</body>
+</html>
