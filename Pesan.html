@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>pesan buat kamuuuuu</title>
+  <style>
+    body {
+      background: #0b2545; /* awal biru agak item */
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      transition: background 2s ease; /* biar mulus waktu ganti warna */
+    }
+    #tetap {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      transition: opacity 2s ease; /* biar hilangnya perlahan */
+    }
+    #berganti {
+      font-size: 2rem;
+      opacity: 0; /* awalnya kosong */
+      transition: opacity 1.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="tetap">Halo Ada Pesan</div>
+  <div id="berganti"></div>
+
+  <script>
+    const tetap = document.getElementById("tetap");
+    const berganti = document.getElementById("berganti");
+    const teksList = ["haiii","aku", "mau bilang sesuatu","tapi kamu mau ga","kalo","aku ajak","mabar roblox"]; // daftar teks
+
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function tampilkanTeks() {
+      for (let i = 0; i < teksList.length; i++) {
+        berganti.textContent = teksList[i];
+
+        // fade in
+        berganti.style.opacity = "1";
+        await delay(3000);
+
+        // fade out
+        berganti.style.opacity = "0";
+        await delay(1500);
+      }
+    }
+
+    // mulai teks berganti setelah 0.5 detik
+    setTimeout(tampilkanTeks, 500);
+
+    // setelah 10 detik → teks "halo" hilang & background hitam
+    setTimeout(() => {
+      tetap.style.opacity = "0";       // hilang perlahan
+      document.body.style.background = "#000000"; // ganti jadi hitam
+    }, 30500);
+  </script>
+</body>
+</html>
